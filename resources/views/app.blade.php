@@ -13,13 +13,12 @@
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
+        @inertiaHead
     @endif
 </head>
 
 <body>
-<div id="app">
-
-</div>
+@inertia
 {{--<nav class="navbar navbar-expand-lg navbar-laravelflow">--}}
 {{--    <div class="container">--}}
 {{--        <a class="navbar-brand" href="/"><strong>Stackoverflow</strong>Clone</a>--}}
