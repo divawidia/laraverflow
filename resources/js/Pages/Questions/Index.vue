@@ -1,5 +1,5 @@
 <script setup>
-    import { Link } from "@inertiajs/vue3";
+import {Link, router} from "@inertiajs/vue3";
 
     defineProps({
         questions: {
@@ -13,7 +13,7 @@
     <h1>Questions</h1>
 
     <div v-for="question in questions" :key="question.id">
-        <Link :href="`/questions/${question.id}`">
+        <Link :href="route('questions.show', question.id)">
             {{ question.title }}
         </Link>
 
