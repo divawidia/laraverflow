@@ -4,12 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Questions/Index', [
-        'questions' => [
-            ['id' => 1, 'title'=> 'Question 1'],
-            ['id' => 2, 'title'=> 'Question 2'],
-        ]
-    ]);
+    return \App\Http\Resources\QuestionResource::collection(\App\Models\Question::with('user')->latest()->paginate(15));
 })->name('questions.index');
 
 Route::get('/questions/{id}', function ($id) {
