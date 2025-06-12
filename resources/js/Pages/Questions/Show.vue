@@ -1,6 +1,7 @@
 <script setup>
 import AppLayout from "../../Layouts/AppLayout.vue";
 import Author from "../../Components/Author.vue";
+import { Head } from "@inertiajs/vue3";
 
     defineProps({
         question: {
@@ -11,6 +12,8 @@ import Author from "../../Components/Author.vue";
 </script>
 
 <template>
+    <Head :title="question.title"/>
+
     <AppLayout>
         <div class="container">
             <div class="row">
