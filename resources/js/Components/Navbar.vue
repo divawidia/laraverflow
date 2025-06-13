@@ -1,4 +1,5 @@
 <script setup>
+import { Link } from "@inertiajs/vue3";
 
 </script>
 
@@ -13,7 +14,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Questions</a>
+                        <Link class="nav-link active" aria-current="page" :href="route('questions.index')">Questions</Link>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="tags.html">Tags</a>
@@ -34,7 +35,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="login.html" class="btn btn-outline-secondary">Log in</a>
-                        <a href="register.html" class="btn btn-primary">Sign up</a>
+                        <Link :href="route('register')" class="btn btn-primary">Sign up</Link>
                     </li>
                 </ul>
             </div>
