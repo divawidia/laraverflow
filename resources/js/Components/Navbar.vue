@@ -1,6 +1,13 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link, usePage, router } from "@inertiajs/vue3";
+import {computed} from "vue";
 
+const page = usePage();
+const userName = computed(() => page.props.user.name);
+const isLoggedIn = computed(() => page.props.user);
+const logout = () => {
+    router.post(route('logout'))
+}
 </script>
 
 <template>
@@ -21,19 +28,19 @@ import { Link } from "@inertiajs/vue3";
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            John doe
-                        </a>
+                    <li class="nav-item dropdown" v-if="isLoggedIn">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ userName }}
+                        </button>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="bookmarks.html">Bookmarks</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                            <li><a class="dropdown-item" href="#" @click.prevent="logout">Logout</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" v-else>
                         <Link :href="route('login')" class="btn btn-outline-secondary me-2">Log in</Link>
                         <Link :href="route('register')" class="btn btn-primary">Sign up</Link>
                     </li>
