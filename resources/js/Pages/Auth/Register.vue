@@ -1,5 +1,13 @@
 <script setup>
 import GuestLayout from "../../Layouts/GuestLayout.vue";
+import { useForm, Link } from "@inertiajs/vue3";
+
+const form = useForm({
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+});
 </script>
 
 <template>
@@ -14,37 +22,43 @@ import GuestLayout from "../../Layouts/GuestLayout.vue";
                             </div>
                         </div>
                     </div>
-                    <form action="#">
+                    <form @submit.prevent="form.post('register')">
                         <div class="row gy-2 overflow-hidden">
                             <div class="col-12">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control is-invalid" name="name" id="name"
-                                           placeholder="Name">
+                                    <input type="text" class="form-control" :class="{ 'is-invalid': form.errors.name }" name="name" id="name" placeholder="Name" v-model="form.name">
                                     <label for="name" class="form-label">Name</label>
-                                    <div class="invalid-feedback">
-                                        The name field is required
+                                    <div class="invalid-feedback" v-if="form.errors.name">
+                                        {{ form.errors.name }}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" name="email" id="email"
-                                           placeholder="Email">
+                                    <input type="email" class="form-control" :class="{ 'is-invalid': form.errors.email }" name="email" id="email" placeholder="Email" v-model="form.email">
                                     <label for="email" class="form-label">Email</label>
+                                    <div class="invalid-feedback" v-if="form.errors.email">
+                                        {{ form.errors.email }}
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" name="password" id="password"
-                                           value="" placeholder="Password">
+                                    <input type="password" class="form-control" :class="{ 'is-invalid': form.errors.password }" name="password" id="password" v-model="form.password" placeholder="Password">
                                     <label for="password" class="form-label">Password</label>
+                                    <div class="invalid-feedback" v-if="form.errors.password">
+                                        {{ form.errors.password }}
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" name="password_confirmation"
-                                           id="password_confirmation" value="" placeholder="Password">
+                                    <input type="password" class="form-control" :class="{ 'is-invalid': form.errors.password_confirmation }" name="password_confirmation"
+                                           id="password_confirmation"  v-model="form.password_confirmation" placeholder="Password">
                                     <label for="password" class="form-label">Password Confirmation</label>
+                                    <div class="invalid-feedback" v-if="form.errors.password_confirmation">
+                                        {{ form.errors.password_confirmation }}
+                                    </div>
                                 </div>
                             </div>
 
@@ -59,8 +73,8 @@ import GuestLayout from "../../Layouts/GuestLayout.vue";
                         <div class="col-12">
                             <hr class="mt-4 mb-4 border-secondary-subtle">
                             <div class="text-center">
-                                Already have an account? <a href="login.html"
-                                                            class="link-secondary text-decoration-none">Sign in</a>
+                                Already have an account?
+                                <Link :href="route('login')" class="link-secondary text-decoration-none">Sign in</Link>
                             </div>
                         </div>
                     </div>
