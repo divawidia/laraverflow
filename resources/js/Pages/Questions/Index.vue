@@ -84,7 +84,7 @@ const hideModal = () => state.modalRef.hide();
                 </div>
             </div>
         </div>
-        <Modal title="Ask Queation" id="question-modal">
+        <Modal title="Ask Question" id="question-modal" size="large" scrollable>
             <QuestionForm/>
         </Modal>
     </AppLayout>
