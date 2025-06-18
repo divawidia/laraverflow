@@ -39,6 +39,9 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'user' => $request->user() ? UserResource::make($request->user()) : null,
+            'toast' => [
+                'success' => session('success')
+            ]
         ];
     }
 }

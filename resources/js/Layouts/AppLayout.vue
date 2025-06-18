@@ -1,11 +1,21 @@
 <script setup>
 import {onMounted, reactive} from "vue";
 import * as bootstrap from 'bootstrap';
+import {router, usePage} from "@inertiajs/vue3";
 import Navbar from "../Components/Navbar.vue";
 import Toast from "../Components/Toast.vue";
 
 const state = reactive({
-    toastRef: null
+    toastRef: null,
+    toastMessage: "",
+})
+
+const page = usePage()
+
+router.on('finish', () => {
+    state.toastMessage = page.props.toast.success;
+
+    showToast()
 })
 
 onMounted(() => {
@@ -19,11 +29,10 @@ const showToast = () => state.toastRef.show()
 
 <template>
     <Navbar />
-    <button class="btn btn-success" @click="showToast()">Show Toast</button>
     <main class="py-4">
         <slot/>
     </main>
-    <Toast id="app-toast"/>
+    <Toast id="app-toast" :message="state.toastMessage" />
 </template>
 
 <style scoped>
